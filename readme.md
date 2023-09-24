@@ -56,9 +56,9 @@ $ node app.js
 2023-09-24 13:25:41 The second trying to get data not using cache in order to confirm the result
 2023-09-24 13:25:42 Process has taken 1171ms
 ```
-###INSTEAD OF CONCLUSION
+### INSTEAD OF CONCLUSION
   * Average time to get the same data from **Postgres** DB **1,2s**
-  * Time to get the same data from **Postgres** DB and after checking the cache **1,5s** (+25% in comparison with just postgresql query)
+  * Time to get the same data from **Postgres** DB after checking the cache **1,5s** (+25% in comparison with just postgresql query)
   * Average time to get the same data from **Redis** cache **0,5s** (240% faster than postgresql)
 
 p.s. This pet project just show elementary operations. If initial getting information is more complicated, cache using will show even more profit
