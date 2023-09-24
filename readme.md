@@ -24,6 +24,12 @@ curl --location 'localhost:8080/postgresdata' \
    
    Look at this container log to get and compare results
 
+## LAUNCHING THE APPLICATION
+run this command
+```bash
+docker compose -f "docker-compose.yml" up -d --build
+```
+
 ## RUN NODE JS APPLICATION LOCALY 
 To simplify debbuging you can run redis and db dockers, and launch application and test application localy. For it you need run the following commands
 
