@@ -1,0 +1,59 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - ./postgres/init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+  
+  redis:
+    image: redis
+    restart: always
+    ports: 
+     - 6379:6379
+
+  application:
+    image: "node:18"
+    user: "node"
+    working_dir: /home/app
+    environment:
+      - DB_HOST=db 
+      - REDIS_HOST=redis
+    volumes:
+      - ./app/:/home/app
+    ports:
+      - "8080:8080"
+    command: "npm start"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/postgresdata"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+  test:
+    image: "node:18"
+    user: "node"
+    environment:
+      - APP_HOST=application
+    working_dir: /home/test-app
+    volumes:
+      - ./test-app/:/home/test-app
+    command: "npm start"
+    depends_on:
+      application:
+        condition: service_healthy
+
+#  pgadmin:
+#    image: dpage/pgadmin4
+#    restart: always
+#    environment:
+#      - PGADMIN_DEFAULT_EMAIL=user@domain.com
+#      - PGADMIN_DEFAULT_PASSWORD=SuperSecret
+#    ports:
+#      - "81:80"
+
+  
+    
