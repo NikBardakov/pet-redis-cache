@@ -15,7 +15,7 @@ async function generateData ()  {
     console.log ('Generating data is starting')
     const start = Date.now();
     let featchArray = []
-    for(let i=1; i<500;i++) {
+    for(let i=1; i<=500;i++) {
 
         const fetchData = fetch(`http://${process.env.APP_HOST || 'localhost'}:8080/postgresdata`, {
             method: 'POST',
@@ -40,7 +40,7 @@ async function getData (urlPath, message)  {
     console.log (message)
     const start = Date.now();
     let featchArray = []
-    for(let i=1; i<500;i++) {
+    for(let i=1; i<=500;i++) {
         const url = urlPath + '/' + i
         const fetchData = fetch(url)
         featchArray = [...featchArray,fetchData]

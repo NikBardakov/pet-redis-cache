@@ -20,13 +20,19 @@ curl --location 'localhost:8080/postgresdata' \
   * GET /postgresdata - get all rows from the table(using just PosgresQL)
   * GET /postgresdata/:id - get a row by id from PostgesQL
   * GET /cacheddata/:id - firstly, application tries to get the row from cache storage, if there aren't the row in cache it's got from PostgresQL DB and saved to cache
-4. **test** - measurement container which demonstrates work of cached and non-cached data.
+4. **test** - measurement container which demonstrates work of cached and non-cached data. This container adds 500 rows, and gets ones different ways(cached/non-cached).
    
    Look at this container log to get and compare results
 
 ## LAUNCHING THE APPLICATION
+
 run this command
 ```bash
+cd app
+npm install
+cd ../test-app
+npm install
+cd ..
 docker compose -f "docker-compose.yml" up -d --build
 ```
 
